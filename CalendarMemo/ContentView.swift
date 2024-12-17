@@ -14,6 +14,29 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            
+            Spacer()
+                .frame(height: 50)
+            
+            HStack(spacing: 60) {
+                Image(systemName: "calendar")
+                Image(systemName: "list.bullet")
+                Image(systemName: "list.dash.header.rectangle")
+            }
+            .imageScale(.large)
+            .foregroundStyle(.customGreen)
+            
+            
+            Spacer()
+                .frame(height: 50)
+            
+            HStack(spacing: 60) {
+                Image(systemName: "calendar")
+                Image(systemName: "list.bullet")
+                Image(systemName: "list.dash.header.rectangle")
+            }
+            .imageScale(.large)
+            .foregroundStyle(.customDarkGreen)
         }
         .padding()
     }

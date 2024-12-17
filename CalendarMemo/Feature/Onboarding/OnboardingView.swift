@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @StateObject private var pathModel = PathModel()
     @StateObject private var onboardingVM = OnboardingViewModel()
     
+    
     var body: some View {
-        OnboardingContentView(onboardingVM: onboardingVM)
-        
-        // navi
-        
-
+        NavigationStack(path: $pathModel.paths) {
+            OnboardingContentView(onboardingVM: onboardingVM)
+                .navigationDestination(for: PathType.self, destination: { pathType in
+                    switch pathType {
+                    case .homeView:
+                        HomeView()
+                    case let .memoView(isCreateMode, memo):
+                        MemoView()
+                    }
+                }
+            )
+        }
+        .environmentObject(pathModel)
     }
 }
 // MARK: - OnboardingContent
@@ -36,6 +46,7 @@ private struct OnboardingContentView: View {
             
             StartBtnView()
         }
+        .background(Color.defalutBackground)
     }
 }
 // MARK: - Indicator
@@ -80,8 +91,6 @@ private struct OnboardingTabView: View {
     }
 }
 
-
-
 // MARK: - OnboardingCell
 private struct OnboardingCellView: View {
     private var content: OnboardingContent
@@ -103,10 +112,9 @@ private struct OnboardingCellView: View {
     }
 }
 
-
-
 // MARK: - StartBtn
 private struct StartBtnView: View {
+    @EnvironmentObject private var pathModel: PathModel
     
     fileprivate var body: some View {
         VStack {
@@ -114,7 +122,7 @@ private struct StartBtnView: View {
             
             HStack {
                 Button(
-                    action: {  },
+                    action: { pathModel.paths.append(.homeView) }, // homeView로 이동!
                     label: {
                         HStack {
                             Text("시작하기")

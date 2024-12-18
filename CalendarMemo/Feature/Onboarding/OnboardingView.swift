@@ -11,6 +11,7 @@ struct OnboardingView: View {
     @StateObject private var pathModel = PathModel()
     @StateObject private var onboardingVM = OnboardingViewModel()
     
+    // commit test
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {

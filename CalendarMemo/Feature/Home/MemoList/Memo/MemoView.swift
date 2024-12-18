@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct MemoView: View {
+    @EnvironmentObject private var pathModel: PathModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            
+            Text("Hello, World!")
+            
+            Button {
+                pathModel.paths.removeLast()
+            } label: {
+                Text("back")
+            }
+
+            
+            Spacer()
+        }
+        
     }
 }
 
 #Preview {
     MemoView()
+        .environmentObject(PathModel())
 }

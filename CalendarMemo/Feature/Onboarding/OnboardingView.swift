@@ -10,18 +10,21 @@ import SwiftUI
 struct OnboardingView: View {
     @StateObject private var pathModel = PathModel()
     @StateObject private var onboardingVM = OnboardingViewModel()
-    
-    // commit test
+    @StateObject private var memoListVM = MemoListViewModel()
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
-            OnboardingContentView(onboardingVM: onboardingVM)
+            //OnboardingContentView(onboardingVM: onboardingVM)
+            MemoListView()
+                .environmentObject(memoListVM)
                 .navigationDestination(for: PathType.self, destination: { pathType in
                     switch pathType {
                     case .homeView:
                         HomeView()
+                        //navigationBarBackButtonHidden()
                     case let .memoView(isCreateMode, memo):
                         MemoView()
+                        //navigationBarBackButtonHidden()
                     }
                 }
             )

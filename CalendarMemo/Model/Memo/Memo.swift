@@ -13,7 +13,22 @@ struct Memo: Hashable {
     var content: String
     var date: Date
     var isChecked: Bool
-    var isNotificatoinOn: Bool
+    var notificatoinType: NotificationType
+    
+    init(id: UUID = UUID(),
+         title: String,
+         content: String,
+         date: Date = .now,
+         isChecked: Bool = false,
+         notificatoinType: NotificationType = .noNoti
+    ) {
+        self.id = id
+        self.date = date
+        self.isChecked = isChecked
+        self.notificatoinType = notificatoinType
+        self.title = title
+        self.content = content
+    }
     
     // 날짜 변환
     var formattedDate: String {

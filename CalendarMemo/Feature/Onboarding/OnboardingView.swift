@@ -21,10 +21,13 @@ struct OnboardingView: View {
                     switch pathType {
                     case .homeView:
                         HomeView()
-                        //navigationBarBackButtonHidden()
+                            .navigationBarBackButtonHidden()
                     case let .memoView(isCreateMode, memo):
-                        MemoView()
-                        //navigationBarBackButtonHidden()
+                        MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: ""))
+                                                      : MemoViewModel(memo: memo ?? Memo(title: "", content: "")),
+                                 isCreateMode: isCreateMode)
+                            .environmentObject(memoListVM)
+                            .navigationBarBackButtonHidden()
                     }
                 }
             )

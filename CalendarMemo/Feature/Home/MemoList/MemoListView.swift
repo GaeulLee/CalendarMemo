@@ -59,7 +59,7 @@ private struct TitleView: View {
         }
         .padding(.leading, 20)
         .padding(.top, 10)
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
     }
 }
 
@@ -86,13 +86,17 @@ private struct ListView: View {
     
     fileprivate var body: some View {
         // list
+        Rectangle()
+            .fill(Color.placeholder)
+            .frame(height: 1)
+        
         ScrollView(.vertical) {
             VStack {
                 ForEach(memoListVM.memos, id: \.self) { memo in
                     ListCellView(memo: memo)
                     
                     Rectangle()
-                        .fill(.customGray)
+                        .fill(Color.placeholder)
                         .frame(height: 1)
                 }
             }
@@ -134,7 +138,9 @@ private struct ListCellView: View {
                         
                         Text(memo.convertedContent)
                             .font(.system(size: 13, weight: .regular))
-                            .foregroundColor(.cusomDarkGray)
+                            .foregroundColor(.customDarkGray)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                     }
 
                     Spacer()

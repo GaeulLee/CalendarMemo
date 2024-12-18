@@ -25,6 +25,7 @@
 		9B1E69A22D117B3B008907CF /* NavigationBtnType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A12D117B3B008907CF /* NavigationBtnType.swift */; };
 		9B1E69A42D117C24008907CF /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A32D117C24008907CF /* CustomNavigationBar.swift */; };
 		9B1E69A62D117D75008907CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A52D117D75008907CF /* Memo.swift */; };
+		9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B355B0C2D12F14F00CA68CC /* NotificationType.swift */; };
 		9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */; };
 		9BDB01442D10375100FDCCA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01432D10375100FDCCA5 /* ContentView.swift */; };
 		9BDB01462D10375400FDCCA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDB01452D10375400FDCCA5 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		9B1E69A12D117B3B008907CF /* NavigationBtnType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBtnType.swift; sourceTree = "<group>"; };
 		9B1E69A32D117C24008907CF /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		9B1E69A52D117D75008907CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		9B355B0C2D12F14F00CA68CC /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		9BDB013E2D10375100FDCCA5 /* CalendarMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMemoApp.swift; sourceTree = "<group>"; };
 		9BDB01432D10375100FDCCA5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		9B1E69762D114ED6008907CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9B355B0B2D12F12D00CA68CC /* Notification */,
 				9B1E698A2D1171D2008907CF /* Path */,
 				9B1E697F2D1150B6008907CF /* Onboarding */,
 				9B1E69802D1150C6008907CF /* Calendar */,
@@ -216,6 +219,14 @@
 				9B1E698D2D117571008907CF /* PathType.swift */,
 			);
 			path = Path;
+			sourceTree = "<group>";
+		};
+		9B355B0B2D12F12D00CA68CC /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				9B355B0C2D12F14F00CA68CC /* NotificationType.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		9BDB01352D10375100FDCCA5 = {
@@ -342,6 +353,7 @@
 				9B1E69A62D117D75008907CF /* Memo.swift in Sources */,
 				9B1E699A2D1177B0008907CF /* MemoViewModel.swift in Sources */,
 				9B1E69A42D117C24008907CF /* CustomNavigationBar.swift in Sources */,
+				9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */,
 				9B1E698C2D11754B008907CF /* Path.swift in Sources */,
 				9B1E69A22D117B3B008907CF /* NavigationBtnType.swift in Sources */,
 				9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */,

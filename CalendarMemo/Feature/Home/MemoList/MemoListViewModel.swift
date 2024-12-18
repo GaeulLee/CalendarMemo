@@ -17,8 +17,7 @@ class MemoListViewModel: ObservableObject {
         return isDeleteMode ? .delete : .edit
     }
     
-    init(memos: [Memo] = [ Memo(id: UUID(), title: "test", content: "test content", date: Date(), isChecked: false, isNotificatoinOn: false),
-                           Memo(id: UUID(), title: "test", content: "test content", date: Date(), isChecked: false, isNotificatoinOn: false)],
+    init(memos: [Memo] = [],
          deleteMemos: [Memo] = [],
          isDeleteMode: Bool = false,
          isDisplayDeleteAlert: Bool = false

@@ -11,11 +11,15 @@ struct OnboardingView: View {
     @StateObject private var pathModel = PathModel()
     @StateObject private var onboardingVM = OnboardingViewModel()
     @StateObject private var memoListVM = MemoListViewModel()
+    @StateObject private var calendarVM = CalendarViewModel()
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
             //OnboardingContentView(onboardingVM: onboardingVM)
-            MemoListView()
+            //MemoListView()
+            //    .environmentObject(memoListVM)
+            CalendarView()
+                .environmentObject(calendarVM)
                 .environmentObject(memoListVM)
                 .navigationDestination(for: PathType.self, destination: { pathType in
                     switch pathType {
@@ -142,7 +146,8 @@ private struct StartBtnView: View {
                     }
                 )
             }
-            .frame(width: 500, height: 65)
+            .frame(maxWidth: .infinity)
+            .frame(height: 65)
             .background(.customBeige)
         }
     }

@@ -109,8 +109,6 @@ private struct BottomSectionView: View {
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var memoListVM: MemoListViewModel
     @ObservedObject private var memoVM: MemoViewModel
-    
-    //@State private var selectedDate: Date
 
     fileprivate init(memoVM: MemoViewModel) {
         self.memoVM = memoVM

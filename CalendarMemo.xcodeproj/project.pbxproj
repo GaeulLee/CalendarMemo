@@ -25,6 +25,7 @@
 		9B1E69A42D117C24008907CF /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A32D117C24008907CF /* CustomNavigationBar.swift */; };
 		9B1E69A62D117D75008907CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A52D117D75008907CF /* Memo.swift */; };
 		9B1E69A82D13EA12008907CF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A72D13EA12008907CF /* Date+Extension.swift */; };
+		9B1E69AB2D141AE1008907CF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69AA2D141AE1008907CF /* Tab.swift */; };
 		9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B355B0C2D12F14F00CA68CC /* NotificationType.swift */; };
 		9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */; };
 		9BDB01442D10375100FDCCA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01432D10375100FDCCA5 /* ContentView.swift */; };
@@ -51,6 +52,7 @@
 		9B1E69A32D117C24008907CF /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		9B1E69A52D117D75008907CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		9B1E69A72D13EA12008907CF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		9B1E69AA2D141AE1008907CF /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		9B355B0C2D12F14F00CA68CC /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		9BDB013E2D10375100FDCCA5 /* CalendarMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMemoApp.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		9B1E69762D114ED6008907CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9B1E69A92D141AD1008907CF /* Home */,
 				9B355B0B2D12F12D00CA68CC /* Notification */,
 				9B1E698A2D1171D2008907CF /* Path */,
 				9B1E697F2D1150B6008907CF /* Onboarding */,
@@ -211,6 +214,14 @@
 				9B1E698D2D117571008907CF /* PathType.swift */,
 			);
 			path = Path;
+			sourceTree = "<group>";
+		};
+		9B1E69A92D141AD1008907CF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9B1E69AA2D141AE1008907CF /* Tab.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		9B355B0B2D12F12D00CA68CC /* Notification */ = {
@@ -337,6 +348,7 @@
 				9B1E69922D117774008907CF /* MemoListView.swift in Sources */,
 				9B1E69902D117767008907CF /* MemoView.swift in Sources */,
 				9B1E69962D117792008907CF /* HomeView.swift in Sources */,
+				9B1E69AB2D141AE1008907CF /* Tab.swift in Sources */,
 				9B1E69852D115133008907CF /* OnboardingView.swift in Sources */,
 				9B1E69982D1177A3008907CF /* HomeViewModel.swift in Sources */,
 				9B1E69832D115127008907CF /* OnboardingViewModel.swift in Sources */,

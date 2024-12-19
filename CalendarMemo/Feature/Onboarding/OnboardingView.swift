@@ -15,16 +15,12 @@ struct OnboardingView: View {
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
-            //OnboardingContentView(onboardingVM: onboardingVM)
-            //MemoListView()
-            //    .environmentObject(memoListVM)
-            CalendarView()
-                .environmentObject(calendarVM)
-                .environmentObject(memoListVM)
+            OnboardingContentView(onboardingVM: onboardingVM)
                 .navigationDestination(for: PathType.self, destination: { pathType in
                     switch pathType {
                     case .homeView:
                         HomeView()
+                            .environmentObject(memoListVM)
                             .navigationBarBackButtonHidden()
                     case let .memoView(isCreateMode, memo):
                         MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: ""))

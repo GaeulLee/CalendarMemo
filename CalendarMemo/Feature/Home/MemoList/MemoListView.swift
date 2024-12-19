@@ -195,7 +195,7 @@ private struct CreateMemoBtnView: View {
             }
             .padding(.trailing, 20)
         }
-        .padding(.bottom, 50)
+        .padding(.bottom, 30)
     }
 }
 

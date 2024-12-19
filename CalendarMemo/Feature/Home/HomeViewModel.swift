@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+class HomeViewModel: ObservableObject {
+    @Published var selectedTab: Tab
+    
+    init(selectedTab: Tab = .calendar) {
+        self.selectedTab = selectedTab
+    }
+}
+
+extension HomeViewModel {
+    func changeTab(to tab: Tab) {
+        selectedTab = tab
+    }
+}

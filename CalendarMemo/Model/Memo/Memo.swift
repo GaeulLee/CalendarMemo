@@ -8,14 +8,14 @@
 import Foundation
 
 struct Memo: Hashable {
-    var id: UUID
+    var id: String
     var title: String
     var content: String
     var date: Date
     var isChecked: Bool
     var notificatoinType: NotificationType
     
-    init(id: UUID = UUID(),
+    init(id: String = UUID().uuidString,
          title: String,
          content: String,
          date: Date = .now,

@@ -27,6 +27,8 @@ struct MemoView: View {
                             memoListVM.updateMemo(memoVM.memo)
                             pathModel.paths.removeLast()
                         }
+                        print("rightBtnAction --> \(memoVM.memo)")
+                        memoVM.setNotification(memo: memoVM.memo)
                     },
                     rightBtnType: isCreateMode ? .create : .complete
                 )
@@ -173,6 +175,7 @@ private struct BottomSectionView: View {
                     Button(
                         action: {
                             memoListVM.deleteMemo(memoVM.memo)
+                            memoVM.deleteNotification(id: memoVM.memo.id)
                             pathModel.paths.removeLast()
                         },
                         label: {

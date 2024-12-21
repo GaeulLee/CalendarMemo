@@ -247,17 +247,19 @@ private struct MemoListContentView: View {
     
     fileprivate var body: some View  {
         VStack {
-            ScrollView(.vertical) {
+            
                 if let memo = memoListVM.memos.first(where: {
                     $0.date.onlyDate == calendarVM.selectedDate?.onlyDate ?? Date.now.onlyDate
                 }) {
-                    ForEach(memoListVM.memos, id: \.self) { memo in
-                        if memo.date.onlyDate == calendarVM.selectedDate?.onlyDate ?? Date.now.onlyDate {
-                            MemoListContentCellView(memo: memo)
-                            
-                            Rectangle()
-                                .fill(Color.placeholder)
-                                .frame(height: 1)
+                    ScrollView(.vertical) {
+                        ForEach(memoListVM.memos, id: \.self) { memo in
+                            if memo.date.onlyDate == calendarVM.selectedDate?.onlyDate ?? Date.now.onlyDate {
+                                MemoListContentCellView(memo: memo)
+                                
+                                Rectangle()
+                                    .fill(Color.placeholder)
+                                    .frame(height: 1)
+                            }
                         }
                     }
                 } else {
@@ -270,7 +272,6 @@ private struct MemoListContentView: View {
                     
                     Spacer()
                 }
-            }
         }
     }
 }

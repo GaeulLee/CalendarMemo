@@ -13,23 +13,19 @@ class MemoListViewModel: ObservableObject {
     @Published var isDeleteMode: Bool
     @Published var isDisplayDeleteAlert: Bool
     
-    @Published var memosOnTheDay: [Memo]
-    
     var naviBarBtnMode: NavigationBtnType {
         return isDeleteMode ? .delete : .edit
     }
     
-    init(memos: [Memo] = [ Memo(title: "test1", content: "ddd"), Memo(title: "test2", content: "ddd2") ],
+    init(memos: [Memo] = [],
          deleteMemos: [Memo] = [],
          isDeleteMode: Bool = false,
-         isDisplayDeleteAlert: Bool = false,
-         memosOnTheDay: [Memo] = []
+         isDisplayDeleteAlert: Bool = false
     ) {
         self.memos = memos
         self.deleteMemos = deleteMemos
         self.isDeleteMode = isDeleteMode
         self.isDisplayDeleteAlert = isDisplayDeleteAlert
-        self.memosOnTheDay = memosOnTheDay
     }
 }
 
@@ -43,12 +39,6 @@ extension MemoListViewModel {
         } else {
             return false
         }
-    }
-
-    
-    func daySelected(_ date: Date) {
-        memosOnTheDay.removeAll()
-        memosOnTheDay = memos.filter({ $0.date.onlyDate == date.onlyDate })
     }
     
     // add

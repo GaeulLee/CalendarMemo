@@ -26,9 +26,9 @@
 		9B1E69A62D117D75008907CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A52D117D75008907CF /* Memo.swift */; };
 		9B1E69A82D13EA12008907CF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A72D13EA12008907CF /* Date+Extension.swift */; };
 		9B1E69AB2D141AE1008907CF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69AA2D141AE1008907CF /* Tab.swift */; };
+		9B1E69AD2D16AF60008907CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69AC2D16AF60008907CF /* NotificationService.swift */; };
 		9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B355B0C2D12F14F00CA68CC /* NotificationType.swift */; };
 		9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */; };
-		9BDB01442D10375100FDCCA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01432D10375100FDCCA5 /* ContentView.swift */; };
 		9BDB01462D10375400FDCCA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDB01452D10375400FDCCA5 /* Assets.xcassets */; };
 		9BDB01492D10375400FDCCA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDB01482D10375400FDCCA5 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -53,10 +53,10 @@
 		9B1E69A52D117D75008907CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		9B1E69A72D13EA12008907CF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9B1E69AA2D141AE1008907CF /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		9B1E69AC2D16AF60008907CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		9B355B0C2D12F14F00CA68CC /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		9BDB013E2D10375100FDCCA5 /* CalendarMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMemoApp.swift; sourceTree = "<group>"; };
-		9BDB01432D10375100FDCCA5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9BDB01452D10375400FDCCA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BDB01482D10375400FDCCA5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +122,7 @@
 		9B1E69772D114EFE008907CF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9B1E69AC2D16AF60008907CF /* NotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -251,7 +252,6 @@
 		9BDB01402D10375100FDCCA5 /* CalendarMemo */ = {
 			isa = PBXGroup;
 			children = (
-				9BDB01432D10375100FDCCA5 /* ContentView.swift */,
 				9B1E69722D114EA8008907CF /* App */,
 				9B1E69732D114EB4008907CF /* Core */,
 				9B1E69742D114EC2008907CF /* Component */,
@@ -343,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B1E69942D117786008907CF /* CalendarView.swift in Sources */,
-				9BDB01442D10375100FDCCA5 /* ContentView.swift in Sources */,
 				9B1E69892D115977008907CF /* OnboardingContent.swift in Sources */,
 				9B1E69922D117774008907CF /* MemoListView.swift in Sources */,
 				9B1E69902D117767008907CF /* MemoView.swift in Sources */,
@@ -359,6 +358,7 @@
 				9B1E69A42D117C24008907CF /* CustomNavigationBar.swift in Sources */,
 				9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */,
 				9B1E698C2D11754B008907CF /* Path.swift in Sources */,
+				9B1E69AD2D16AF60008907CF /* NotificationService.swift in Sources */,
 				9B1E69A22D117B3B008907CF /* NavigationBtnType.swift in Sources */,
 				9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */,
 				9B1E699C2D1177BC008907CF /* MemoListViewModel.swift in Sources */,

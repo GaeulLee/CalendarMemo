@@ -23,8 +23,10 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    var onlyDate: Date {
-        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        return Calendar.current.date(from: components)!
+    var onlyDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MM dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.string(from: self)
     }
 }

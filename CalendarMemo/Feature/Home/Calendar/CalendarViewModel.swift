@@ -9,8 +9,7 @@ import Foundation
 
 class CalendarViewModel: ObservableObject {
     @Published var month: Date
-    //@Published var selectedDate: Date
-    @Published var memosOnTheDay: [Memo]
+    @Published var selectedDate: Date?
     
     var weekdaySymbols: [String] {
         var cal = Calendar.current
@@ -20,16 +19,15 @@ class CalendarViewModel: ObservableObject {
     }
     
     init(month: Date = .now,
-         //selectedDate: Date = .now,
-         memosOnTheDay: [Memo] = []
+         selectedDate: Date? = nil
     ) {
         self.month = month
-        //self.selectedDate = selectedDate
-        self.memosOnTheDay = memosOnTheDay
+        self.selectedDate = selectedDate
     }
 }
 
 extension CalendarViewModel {
+    
     /// startDayOfMonth에 해당하는 날짜에서 '일' 단위로 계산(입력받은 정수를 더함)해서 Date 타입으로 반환 -> day가 2라면 12/02
     func getDate(for day: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: day, to: startDayOfMonth())!
@@ -61,12 +59,5 @@ extension CalendarViewModel {
         if let newMonth = Calendar.current.date(byAdding: .month, value: value, to: month) {
             self.month = newMonth
         }
-    }
-    
-    func dayBtnTapped(_ date: Date, _ memos: [Memo]) {
-        memosOnTheDay.removeAll()
-        
-        let selectedDate = Calendar.current.date(byAdding : .day, value: -1, to: date.onlyDate)!
-        memosOnTheDay = memos.filter({ $0.date.onlyDate == selectedDate.onlyDate })
     }
 }

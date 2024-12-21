@@ -22,8 +22,8 @@ struct OnboardingView: View {
                         HomeView()
                             .environmentObject(memoListVM)
                             .navigationBarBackButtonHidden()
-                    case let .memoView(isCreateMode, memo):
-                        MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: ""))
+                    case let .memoView(isCreateMode, memo, selectedDate):
+                        MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: "", date: selectedDate ?? .now))
                                                       : MemoViewModel(memo: memo ?? Memo(title: "", content: "")),
                                  isCreateMode: isCreateMode)
                             .environmentObject(memoListVM)

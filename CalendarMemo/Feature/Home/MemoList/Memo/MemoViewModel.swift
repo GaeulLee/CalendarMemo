@@ -21,4 +21,8 @@ extension MemoViewModel {
     func setDisplayCalendar(_ isDisplay: Bool) {
         isDisplayCalendar = isDisplay
     }
+    
+    func changeDate(date: Date) {
+        memo.date = date
+    }
 }

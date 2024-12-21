@@ -118,7 +118,7 @@ private struct ListCellView: View {
     
     fileprivate var body: some View {
         Button(
-            action: { pathModel.paths.append(.memoView(isCreateMode: false, memo: memo)) },
+            action: { pathModel.paths.append(.memoView(isCreateMode: false, memo: memo, selectedDate: nil)) },
             label: {
                 HStack(spacing: 15) {
                     if !memoListVM.isDeleteMode {
@@ -178,7 +178,7 @@ private struct CreateMemoBtnView: View {
                 Spacer()
                 
                 Button(
-                    action: { pathModel.paths.append(.memoView(isCreateMode: true, memo: nil)) },
+                    action: { pathModel.paths.append(.memoView(isCreateMode: true, memo: nil, selectedDate: nil)) },
                     label: {
                         HStack(spacing: 6) {
                             Image("plus")

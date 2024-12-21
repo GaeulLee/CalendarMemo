@@ -40,7 +40,7 @@ struct MemoView: View {
                 
             }
             // bottomSection
-            BottomSectionView(memoVM: memoVM)
+            BottomSectionView(memoVM: memoVM, isCreateMode: $isCreateMode)
         }
         .background(Color.defalutBackground)
         
@@ -109,9 +109,11 @@ private struct BottomSectionView: View {
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var memoListVM: MemoListViewModel
     @ObservedObject private var memoVM: MemoViewModel
-
-    fileprivate init(memoVM: MemoViewModel) {
+    @Binding private var isCreateMode: Bool
+    
+    fileprivate init(memoVM: MemoViewModel, isCreateMode: Binding<Bool>) {
         self.memoVM = memoVM
+        self._isCreateMode = isCreateMode
     }
     
     fileprivate var body: some View {
@@ -167,18 +169,20 @@ private struct BottomSectionView: View {
                 Spacer()
                 
                 // deleteBtn
-                Button(
-                    action: {
-                        memoListVM.deleteMemo(memoVM.memo)
-                        pathModel.paths.removeLast()
-                    },
-                    label: {
-                        Image("trash")
-                            .renderingMode(.template)
-                            .foregroundColor(.customDarkGreen)
-                    }
-                )
-                .padding(.trailing, 20)
+                if !isCreateMode {
+                    Button(
+                        action: {
+                            memoListVM.deleteMemo(memoVM.memo)
+                            pathModel.paths.removeLast()
+                        },
+                        label: {
+                            Image("trash")
+                                .renderingMode(.template)
+                                .foregroundColor(.customDarkGreen)
+                        }
+                    )
+                    .padding(.trailing, 20)
+                }
             }
             .frame(height: 70)
         }

@@ -19,10 +19,10 @@ struct CalendarView: View {
                 .padding(.top, 25)
             
             CalendarGridView(calendarVM: calendarVM)
-                .frame(height: 270)
+                .frame(height: 350)
             
             // memo on the day(달력에서 선택한 날의 메모를 보여 줌, 기본은 오늘)
-            MemoTitleView()
+            MemoTitleView(calendarVM: calendarVM)
             
             MemoListContentView(calendarVM: calendarVM)
         }
@@ -75,7 +75,7 @@ private struct CalendarHeaderView: View {
                 ForEach(calendarVM.weekdaySymbols, id: \.self) { symbol in
                   Text(symbol)
                     .frame(maxWidth: .infinity)
-                    .font(.system(size: 16))
+                    .font(.system(size: 18, weight: .bold))
                 }
             }
             .padding(.horizontal, 20)
@@ -86,6 +86,7 @@ private struct CalendarHeaderView: View {
 
 // MARK: - CalendarGrid
 private struct CalendarGridView: View {
+    @EnvironmentObject private var memoListVM: MemoListViewModel
     @ObservedObject private var calendarVM: CalendarViewModel
     
     fileprivate init(calendarVM: CalendarViewModel) {
@@ -101,15 +102,31 @@ private struct CalendarGridView: View {
                 
                 ForEach(0..<daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday { // 첫째주 첫요일까지 빈공간
-                        RoundedRectangle(cornerRadius: 5)
+                        Rectangle()
                             .foregroundColor(Color.clear)
                     } else {
-                        //let date = calendarVM.getDate(for: index - firstWeekday)
+                        let date = index - firstWeekday
                         let day = index - firstWeekday + 1
-                        CalendarGridCellView(calendarVM: calendarVM, day: day)
+                        let isSelected = calendarVM.selectedDate == calendarVM.getDate(for: date)
+                        let isToday = Date.now.onlyDate == calendarVM.getDate(for: date).onlyDate
+                        let isMemoWritten = memoListVM.isMemoWritten(date: calendarVM.getDate(for: date))
+                        
+                        CalendarGridCellView(
+                            calendarVM: calendarVM,
+                            isSelected: isSelected,
+                            isToday: isToday,
+                            isMemoWritten: isMemoWritten,
+                            day: day
+                        )
+                            .onTapGesture {
+                                calendarVM.selectedDate = calendarVM.getDate(for: date)
+                                memoListVM.daySelected(calendarVM.getDate(for: date))
+                            }
                     }
                 }
             }
+            
+            Spacer()
         }
         .padding(.horizontal, 20)
     }
@@ -119,26 +136,67 @@ private struct CalendarGridView: View {
 private struct CalendarGridCellView: View {
     @EnvironmentObject private var memoListVM: MemoListViewModel
     @ObservedObject private var calendarVM: CalendarViewModel
-    @State private var isClicked: Bool
-    var day: Int
+    private var isSelected: Bool
+    private var isToday: Bool
+    private var isMemoWritten: Bool
+    private var day: Int
+    
+    private var backColor: Color {
+        if isSelected {
+            return .customDarkGreen
+        } else if isToday {
+            return .customDarkRed
+        } else {
+            return .clear
+        }
+    }
+    
+    private var textColor: Color {
+        if isSelected || isToday {
+            return .white
+        } else {
+            return .defaultFont
+        }
+    }
 
-    fileprivate init(calendarVM: CalendarViewModel, isClicked: Bool = false, day: Int) {
+
+    fileprivate init(
+        calendarVM: CalendarViewModel,
+        isSelected: Bool,
+        isToday: Bool,
+        isMemoWritten: Bool,
+        day: Int
+    ) {
         self.calendarVM = calendarVM
-        _isClicked = State(initialValue: isClicked)
+        self.isSelected = isSelected
+        self.isToday = isToday
+        self.isMemoWritten = isMemoWritten
         self.day = day
     }
     
     fileprivate var body: some View {
-        Button(
-            action: {
-                calendarVM.dayBtnTapped(calendarVM.getDate(for: day), memoListVM.memos)
-            },
-            label: {
-                Text(String(day))
-                    .foregroundColor(.defaultFont)
-                    .font(.system(size: 16))
+        VStack {
+            Circle()
+                .fill(backColor)
+                .overlay(
+                    Text(String(day))
+                        .font(.system(size: 17,
+                                      weight: isSelected || isToday ? .bold : .regular))
+                )
+                .foregroundColor(textColor)
+            
+            Spacer()
+            
+            if isMemoWritten {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.customDarkRed)
+                    .frame(width: 8, height: 8)
+            } else {
+                Spacer()
+                    .frame(height: 8)
             }
-        )
+        }
+        .frame(height: 50)
     }
 }
 
@@ -146,6 +204,11 @@ private struct CalendarGridCellView: View {
 // MARK: - MemoTitle
 private struct MemoTitleView: View {
     @EnvironmentObject private var pathModel: PathModel
+    @ObservedObject private var calendarVM: CalendarViewModel
+    
+    fileprivate init(calendarVM: CalendarViewModel) {
+        self.calendarVM = calendarVM
+    }
     
     fileprivate var body: some View {
         VStack {
@@ -157,7 +220,7 @@ private struct MemoTitleView: View {
                 Spacer()
                 
                 Button(
-                    action: { pathModel.paths.append(.memoView(isCreateMode: true, memo: nil)) },
+                    action: { pathModel.paths.append(.memoView(isCreateMode: true, memo: nil, selectedDate: calendarVM.selectedDate)) },
                     label: {
                         Image("plus")
                             .renderingMode(.template)
@@ -166,7 +229,6 @@ private struct MemoTitleView: View {
                 )
             }
             .padding(.horizontal, 20)
-            .padding(.top, 10)
             
             Rectangle()
                 .fill(Color.placeholder)
@@ -186,7 +248,7 @@ private struct MemoListContentView: View {
     
     fileprivate var body: some View  {
         VStack {
-            if calendarVM.memosOnTheDay.isEmpty {
+            if memoListVM.memosOnTheDay.isEmpty {
                 Spacer()
                 
                 Text("작성된 메모가 없습니다.")
@@ -197,16 +259,14 @@ private struct MemoListContentView: View {
                 Spacer()
             } else {
                 ScrollView(.vertical) {
-                    ForEach(calendarVM.memosOnTheDay, id: \.self) { memo in
+                    ForEach(memoListVM.memosOnTheDay, id: \.self) { memo in
                         MemoListContentCellView(memo: memo)
                         
                         Rectangle()
                             .fill(Color.placeholder)
                             .frame(height: 1)
                     }
-                    
                 }
-                
             }
         }
     }
@@ -224,7 +284,7 @@ private struct MemoListContentCellView: View {
     
     fileprivate var body: some View {
         Button(
-            action: { pathModel.paths.append(.memoView(isCreateMode: false, memo: memo)) },
+            action: { pathModel.paths.append(.memoView(isCreateMode: false, memo: memo, selectedDate: nil)) },
             label: {
                 HStack(spacing: 15) {
                     Button(

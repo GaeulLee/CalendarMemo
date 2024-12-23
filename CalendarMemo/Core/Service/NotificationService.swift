@@ -9,14 +9,10 @@ import UserNotifications
 
 struct NotificationService {
     
-    var notiCenter = UNUserNotificationCenter.current()
+    let notiCenter = UNUserNotificationCenter.current()
     
     /// 알림 설정
     func setNotification(memo: Memo)  {
-        if memo.notificatoinType == .noNoti {
-            return
-        }
-        
         // Requests a person’s authorization to allow local and remote notifications for your app.
         notiCenter.requestAuthorization(options: [.alert]) { granted, _ in
             if granted { // 사용자에게 알림 허용을 받았으면
@@ -47,46 +43,21 @@ struct NotificationService {
                     content: content,
                     trigger: trigger
                 )
-                print("setNotification -> \(request.identifier)")
                 
                 notiCenter.add(request) // Schedules the delivery of a local notification.
             }
         }
     }
     
-    ///  특정 알림이 존재하는지 확인
-    func findPendingNotification(id: String) -> Bool {
-        var result = false
-        print("findPendingNotification with: \(id)")
+    /// 대기 중인 알람 삭제
+    func removePendingNotification(identifier: String) {
         notiCenter.getPendingNotificationRequests { requests in
             for request in requests {
-                if request.identifier == id {
-                    result = true
-                    print("\(request.identifier) -> 알림 존재")
+                if request.identifier == identifier {
+                    notiCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+                    print("\(identifier) -> 알림 삭제 완료")
                 }
             }
         }
-        
-        return result
-    }
-    
-    func test() {
-        notiCenter.getPendingNotificationRequests { requests in
-            for request in requests {
-                print("requests identifier -> \(request.identifier)")
-            }
-        }
-    }
-    
-    /// 대기 중인 알람 삭제
-    func removePendingNotification(identifier: String){
-        let arr = [ "\(identifier)" ]
-        notiCenter.removePendingNotificationRequests(withIdentifiers: arr)
-        print("\(identifier) -> 알림 삭제 완료")
-    }
-
-    /// 전달된 알람 삭제
-    func removeDeliveredNotification(identifiers: [String]){
-        notiCenter.removeDeliveredNotifications(withIdentifiers: identifiers)
     }
 }

@@ -11,7 +11,7 @@ class MemoViewModel: ObservableObject {
     @Published var memo: Memo
     @Published var isDisplayCalendar: Bool
     
-    private var notiService = NotificationService()
+    private let notiService = NotificationService()
 
     init(memo: Memo, isDisplayCalendar: Bool = false) {
         self.memo = memo
@@ -29,19 +29,15 @@ extension MemoViewModel {
     }
     
     func setNotification(memo: Memo) {
-        if notiService.findPendingNotification(id: memo.id) { // 설정한 알림이 있으면
-            notiService.removePendingNotification(identifier: memo.id) // 삭제하고
-            notiService.setNotification(memo: memo) // 다시 생성
-        } else { // 없으면
-            notiService.setNotification(memo: memo) // 생성
+        if memo.notificatoinType == .noNoti { // 알림 설정 안 함이면 삭제
+            deleteNotification(id: memo.id)
+        } else { // 그 외이면 삭제하고 알림 생성
+            deleteNotification(id: memo.id)
+            notiService.setNotification(memo: memo)
         }
-        
-        notiService.test()
     }
     
     func deleteNotification(id: String) {
-        if notiService.findPendingNotification(id: id) {
-            notiService.removePendingNotification(identifier: id)
-        }
+        notiService.removePendingNotification(identifier: id)
     }
 }

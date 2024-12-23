@@ -27,7 +27,6 @@ struct MemoView: View {
                             memoListVM.updateMemo(memoVM.memo)
                             pathModel.paths.removeLast()
                         }
-                        print("rightBtnAction --> \(memoVM.memo)")
                         memoVM.setNotification(memo: memoVM.memo)
                     },
                     rightBtnType: isCreateMode ? .create : .complete

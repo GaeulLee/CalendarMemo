@@ -19,7 +19,7 @@ struct NotificationService {
                 // The editable content for a notification.
                 let content = UNMutableNotificationContent()
                 content.title = memo.title
-                switch memo.notificatoinType {
+                switch memo.notificationType {
                 case .onTheDay:
                     content.body = "작성한 일정이 오늘입니다."
                 case .aDayBefore:

@@ -13,7 +13,12 @@ struct Memo: Hashable {
     var content: String
     var date: Date
     var isChecked: Bool
-    var notificatoinType: NotificationType
+    var notificationType: NotificationType
+    
+    // 변환 날짜 + 메모 컨텐츠 -> 리스트용
+    var convertedContent: String {
+        return "\(date.formattedDateForMemo), \(content)"
+    }
     
     init(id: String = UUID().uuidString,
          title: String,
@@ -25,13 +30,8 @@ struct Memo: Hashable {
         self.id = id
         self.date = date
         self.isChecked = isChecked
-        self.notificatoinType = notificatoinType
+        self.notificationType = notificatoinType
         self.title = title
         self.content = content
-    }
-    
-    // 변환 날짜 + 메모 컨텐츠 -> 리스트용
-    var convertedContent: String {
-        return "\(date.formattedDateForMemo), \(content)"
     }
 }

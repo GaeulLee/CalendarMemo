@@ -20,19 +20,18 @@ struct OnboardingView: View {
                     switch pathType {
                     case .homeView:
                         HomeView()
-                            .environmentObject(memoListVM)
                             .navigationBarBackButtonHidden()
                     case let .memoView(isCreateMode, memo, selectedDate):
                         MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: "", date: selectedDate ?? .now))
                                                       : MemoViewModel(memo: memo ?? Memo(title: "", content: "")),
                                  isCreateMode: isCreateMode)
-                            .environmentObject(memoListVM)
                             .navigationBarBackButtonHidden()
                     }
                 }
             )
         }
         .environmentObject(pathModel)
+        .environmentObject(memoListVM)
     }
 }
 // MARK: - OnboardingContent

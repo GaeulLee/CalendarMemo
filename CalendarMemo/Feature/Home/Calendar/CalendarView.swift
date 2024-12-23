@@ -102,8 +102,8 @@ private struct CalendarGridView: View {
                 
                 ForEach(0..<daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday { // 첫째주 첫요일까지 빈공간
-                        Rectangle()
-                            .foregroundColor(Color.clear)
+//                        Rectangle()
+//                            .foregroundColor(Color.clear)
                     } else {
                         let date = index - firstWeekday
                         let day = index - firstWeekday + 1
@@ -280,15 +280,23 @@ private struct MemoListContentView: View {
 private struct MemoListContentCellView: View {
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var memoListVM: MemoListViewModel
-    private var memo: Memo
+    private var memo: MemoData
 
-    fileprivate init(memo: Memo) {
+    fileprivate init(memo: MemoData) {
         self.memo = memo
     }
     
     fileprivate var body: some View {
         Button(
-            action: { pathModel.paths.append(.memoView(isCreateMode: false, memo: memo, selectedDate: nil)) },
+            action: {
+                let memoForUpdate = Memo(id: memo.id,
+                                         title: memo.title,
+                                         content: memo.content,
+                                         date: memo.date,
+                                         isChecked: memo.isChecked,
+                                         notificatoinType: memo.notificationType)
+                pathModel.paths.append(.memoView(isCreateMode: false, memo: memoForUpdate, selectedDate: nil))
+            },
             label: {
                 HStack(spacing: 15) {
                     Button(
@@ -302,7 +310,7 @@ private struct MemoListContentCellView: View {
                             .foregroundColor(memo.isChecked ? .customDarkBeige : .defaultFont)
                             .strikethrough(memo.isChecked)
                         
-                        Text(memo.convertedContent)
+                        Text("\(memo.date.formattedDateForMemo), \(memo.content)")
                             .font(.system(size: 13, weight: .regular))
                             .foregroundColor(.customDarkGray)
                             .lineLimit(1)

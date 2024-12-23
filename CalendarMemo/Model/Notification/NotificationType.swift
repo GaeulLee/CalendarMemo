@@ -7,11 +7,14 @@
 
 import Foundation
 
-enum NotificationType: String, CaseIterable, Identifiable {
-    case noNoti = "설정 안 함"
-    case onTheDay = "당일(오전 9시)"
-    case aDayBefore = "하루 전(오전 9시)"
-    case twoDaysBefore = "이틀 전(오전 9시)"
+@objc
+public enum NotificationType: Int32, CaseIterable, Identifiable {
+    // core data 에서 열거형을 쓰는게 꽤 까다로움,, 어쩔 수 없이 문자열이 아닌 정수로 받았다..
+    // 다른 방법이 있었을까ㅠㅜ
+    case noNoti = 0
+    case onTheDay = 1
+    case aDayBefore = 2
+    case twoDaysBefore = 3
     
-    var id: String { self.rawValue }
+    public var id: Int32 { self.rawValue }
 }

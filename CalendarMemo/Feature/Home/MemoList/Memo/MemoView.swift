@@ -155,9 +155,19 @@ private struct BottomSectionView: View {
                             .font(.system(size: 16))
                             .foregroundColor(.defaultFont)
                             
-                        Picker("알림", selection: $memoVM.memo.notificatoinType) {
+                        Picker("알림", selection: $memoVM.memo.notificationType) {
                             ForEach(NotificationType.allCases) { type in
-                                Text(type.rawValue).tag(type)
+                                switch type {
+                                case .noNoti:
+                                    Text("설정 안 함").tag(type)
+                                case .onTheDay:
+                                    Text("당일(오전 9시)").tag(type)
+                                case .aDayBefore:
+                                    Text("하루 전(오전 9시)").tag(type)
+                                case .twoDaysBefore:
+                                    Text("이틀 전(오전 9시)").tag(type)
+                                }
+                                
                             }
                         }
                         .pickerStyle(.menu)

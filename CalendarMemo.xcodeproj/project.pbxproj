@@ -27,6 +27,9 @@
 		9B1E69A82D13EA12008907CF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69A72D13EA12008907CF /* Date+Extension.swift */; };
 		9B1E69AB2D141AE1008907CF /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69AA2D141AE1008907CF /* Tab.swift */; };
 		9B1E69AD2D16AF60008907CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69AC2D16AF60008907CF /* NotificationService.swift */; };
+		9B1E69B32D19427A008907CF /* MemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69B12D19427A008907CF /* MemoData.xcdatamodeld */; };
+		9B1E69BE2D194BF4008907CF /* MemoData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69BC2D194BF4008907CF /* MemoData+CoreDataClass.swift */; };
+		9B1E69BF2D194BF4008907CF /* MemoData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1E69BD2D194BF4008907CF /* MemoData+CoreDataProperties.swift */; };
 		9B355B0D2D12F14F00CA68CC /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B355B0C2D12F14F00CA68CC /* NotificationType.swift */; };
 		9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */; };
 		9BDB01462D10375400FDCCA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDB01452D10375400FDCCA5 /* Assets.xcassets */; };
@@ -54,6 +57,9 @@
 		9B1E69A72D13EA12008907CF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9B1E69AA2D141AE1008907CF /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		9B1E69AC2D16AF60008907CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		9B1E69B22D19427A008907CF /* MemoData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemoData.xcdatamodel; sourceTree = "<group>"; };
+		9B1E69BC2D194BF4008907CF /* MemoData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MemoData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9B1E69BD2D194BF4008907CF /* MemoData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MemoData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9B355B0C2D12F14F00CA68CC /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		9BDB013E2D10375100FDCCA5 /* CalendarMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDB01412D10375100FDCCA5 /* CalendarMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMemoApp.swift; sourceTree = "<group>"; };
@@ -204,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				9B1E69A52D117D75008907CF /* Memo.swift */,
+				9B1E69BC2D194BF4008907CF /* MemoData+CoreDataClass.swift */,
+				9B1E69BD2D194BF4008907CF /* MemoData+CoreDataProperties.swift */,
+				9B1E69B12D19427A008907CF /* MemoData.xcdatamodeld */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -349,6 +358,8 @@
 				9B1E69962D117792008907CF /* HomeView.swift in Sources */,
 				9B1E69AB2D141AE1008907CF /* Tab.swift in Sources */,
 				9B1E69852D115133008907CF /* OnboardingView.swift in Sources */,
+				9B1E69BE2D194BF4008907CF /* MemoData+CoreDataClass.swift in Sources */,
+				9B1E69B32D19427A008907CF /* MemoData.xcdatamodeld in Sources */,
 				9B1E69982D1177A3008907CF /* HomeViewModel.swift in Sources */,
 				9B1E69832D115127008907CF /* OnboardingViewModel.swift in Sources */,
 				9B1E699E2D1177CC008907CF /* CalendarViewModel.swift in Sources */,
@@ -361,6 +372,7 @@
 				9B1E69AD2D16AF60008907CF /* NotificationService.swift in Sources */,
 				9B1E69A22D117B3B008907CF /* NavigationBtnType.swift in Sources */,
 				9BDB01422D10375100FDCCA5 /* CalendarMemoApp.swift in Sources */,
+				9B1E69BF2D194BF4008907CF /* MemoData+CoreDataProperties.swift in Sources */,
 				9B1E699C2D1177BC008907CF /* MemoListViewModel.swift in Sources */,
 				9B1E698E2D117571008907CF /* PathType.swift in Sources */,
 			);
@@ -576,6 +588,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9B1E69B12D19427A008907CF /* MemoData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9B1E69B22D19427A008907CF /* MemoData.xcdatamodel */,
+			);
+			currentVersion = 9B1E69B22D19427A008907CF /* MemoData.xcdatamodel */;
+			path = MemoData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9BDB01362D10375100FDCCA5 /* Project object */;
 }

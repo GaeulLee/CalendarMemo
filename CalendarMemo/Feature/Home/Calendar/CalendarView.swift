@@ -268,7 +268,7 @@ private struct MemoListContentView: View {
                     Text("작성된 메모가 없습니다.")
                         .font(.system(size: 16))
                         .foregroundColor(.defaultFont)
-                        .padding(.bottom, 50)
+//                        .padding(.bottom,0)
                     
                     Spacer()
                 }

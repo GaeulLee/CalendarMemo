@@ -15,34 +15,29 @@ struct HomeView: View {
             TabView(selection: $homeVM.selectedTab) {
                 CalendarView()
                     .tabItem {
-                        // TODO: - find icon for tab item
-                        Image(systemName: "calendar")
-                            .renderingMode(.template)
-                            .accentColor(homeVM.selectedTab == .calendar ? .customDarkGreen : .customBrightGreen)
+                        Image(homeVM.selectedTab == .calendar ? "calendar_selected" : "calendar")
                     }.tag(Tab.calendar)
                 
                 MemoListView()
                     .tabItem {
-                        Image(systemName: "doc.text")
-                            .renderingMode(.template)
-                            .foregroundColor(homeVM.selectedTab == .memo ? .customDarkGreen : .customBrightGreen)
+                        Image(homeVM.selectedTab == .memo ? "list_selected" : "list")
                     }.tag(Tab.memo)
             }
             
-//            VStack {
-//                Spacer()
-//                
-//                Rectangle()
-//                    .fill(
-//                        LinearGradient(
-//                            gradient: Gradient(colors: [Color.defalutBackground, Color.gray.opacity(0.1)]),
-//                            startPoint: .top,
-//                            endPoint: .bottom
-//                        )
-//                    )
-//                    .frame(height: 10)
-//                    .padding(.bottom, 60)
-//            }
+            VStack {
+                Spacer()
+                
+                Rectangle()
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.defalutBackground, Color.gray.opacity(0.1)]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .frame(height: 10)
+                    .padding(.bottom, 50)
+            }
         }
     }
 }

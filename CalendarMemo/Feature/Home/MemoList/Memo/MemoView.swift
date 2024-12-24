@@ -14,7 +14,7 @@ struct MemoView: View {
     @State var isCreateMode: Bool
     
     var body: some View {
-        ZStack {
+//        ZStack {
             VStack {
                 // naviBar
                 CustomNavigationBar(
@@ -39,10 +39,12 @@ struct MemoView: View {
                 // contentInput
                 ContentInputView(memoVM: memoVM)
                 
+                // bottomSection
+                BottomSectionView(memoVM: memoVM, isCreateMode: $isCreateMode)
+                
             }
-            // bottomSection
-            BottomSectionView(memoVM: memoVM, isCreateMode: $isCreateMode)
-        }
+            
+        //}
         .background(Color.defalutBackground)
         
     }
@@ -119,8 +121,6 @@ private struct BottomSectionView: View {
     
     fileprivate var body: some View {
         VStack {
-            Spacer()
-            
             Rectangle()
                 .fill(
                     LinearGradient(

@@ -22,8 +22,8 @@ struct OnboardingView: View {
                         HomeView()
                             .navigationBarBackButtonHidden()
                     case let .memoView(isCreateMode, memo, selectedDate):
-                        MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: "", date: selectedDate ?? .now))
-                                                      : MemoViewModel(memo: memo ?? Memo(title: "", content: "")),
+                        MemoView(memoVM: isCreateMode ? MemoViewModel(memo: Memo(title: "", content: "", date: selectedDate?.exactDate ?? .now.exactDate))
+                                 : MemoViewModel(memo: memo ?? Memo(title: "", content: "", date: .now.exactDate)),
                                  isCreateMode: isCreateMode)
                             .navigationBarBackButtonHidden()
                     }

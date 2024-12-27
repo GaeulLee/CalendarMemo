@@ -14,7 +14,6 @@ class CalendarViewModel: ObservableObject {
     var weekdaySymbols: [String] {
         var cal = Calendar.current
         cal.locale = Locale(identifier: "ko_KR")
-        
         return cal.veryShortWeekdaySymbols  // 일,월 ... 금, 토
     }
     

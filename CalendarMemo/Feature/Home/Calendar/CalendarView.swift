@@ -102,24 +102,23 @@ private struct CalendarGridView: View {
                 
                 ForEach(0..<daysInMonth + firstWeekday, id: \.self) { index in
                     if index < firstWeekday { // 첫째주 첫요일까지 빈공간
-//                        Rectangle()
-//                            .foregroundColor(Color.clear)
+                        Rectangle()
+                            .foregroundColor(Color.clear)
                     } else {
                         let date = index - firstWeekday
                         let day = index - firstWeekday + 1
-                        let isSelected = calendarVM.selectedDate == calendarVM.getDate(for: date)
-                        let isToday = Date.now.onlyDate == calendarVM.getDate(for: date).onlyDate
-                        let isMemoWritten = memoListVM.isMemoWritten(date: calendarVM.getDate(for: date))
+                        let isSelected = calendarVM.selectedDate == calendarVM.getDate(for: date).exactDate
+                        let isToday = Date.now.exactDate == calendarVM.getDate(for: date).exactDate
+                        let isMemoWritten = memoListVM.isMemoWritten(date: calendarVM.getDate(for: date).exactDate)
                         
                         CalendarGridCellView(
                             calendarVM: calendarVM,
                             isSelected: isSelected,
                             isToday: isToday,
                             isMemoWritten: isMemoWritten,
-                            day: day
-                        )
+                            day: day)
                             .onTapGesture {
-                                calendarVM.selectedDate = calendarVM.getDate(for: date)
+                                calendarVM.selectedDate = calendarVM.getDate(for: date).exactDate
                             }
                     }
                 }
@@ -157,7 +156,6 @@ private struct CalendarGridCellView: View {
             return .defaultFont
         }
     }
-
 
     fileprivate init(
         calendarVM: CalendarViewModel,
@@ -199,7 +197,6 @@ private struct CalendarGridCellView: View {
     }
 }
 
-
 // MARK: - MemoTitle
 private struct MemoTitleView: View {
     @EnvironmentObject private var pathModel: PathModel
@@ -219,7 +216,9 @@ private struct MemoTitleView: View {
                 Spacer()
                 
                 Button(
-                    action: { pathModel.paths.append(.memoView(isCreateMode: true, memo: nil, selectedDate: calendarVM.selectedDate)) },
+                    action: {
+                        pathModel.paths.append(.memoView(isCreateMode: true, memo: nil, selectedDate: calendarVM.selectedDate))
+                    },
                     label: {
                         Image("plus")
                             .renderingMode(.template)
@@ -247,13 +246,12 @@ private struct MemoListContentView: View {
     
     fileprivate var body: some View  {
         VStack {
-            
-                if let memo = memoListVM.memos.first(where: {
-                    $0.date.onlyDate == calendarVM.selectedDate?.onlyDate ?? Date.now.onlyDate
+                if let memo = memoListVM.memos.first(where: { // memoListVM.memos에 selectedDate와 일치하는 메모 데이터가 있으면
+                    $0.date.stringToDate == calendarVM.selectedDate ?? Date.now.exactDate
                 }) {
                     ScrollView(.vertical) {
                         ForEach(memoListVM.memos, id: \.self) { memo in
-                            if memo.date.onlyDate == calendarVM.selectedDate?.onlyDate ?? Date.now.onlyDate {
+                            if memo.date.stringToDate == calendarVM.selectedDate ?? Date.now.exactDate {
                                 MemoListContentCellView(memo: memo)
                                 
                                 Rectangle()
@@ -262,13 +260,12 @@ private struct MemoListContentView: View {
                             }
                         }
                     }
-                } else {
+                } else { // 없으면 없다고 표시
                     Spacer()
                     
                     Text("작성된 메모가 없습니다.")
                         .font(.system(size: 16))
                         .foregroundColor(.defaultFont)
-//                        .padding(.bottom,0)
                     
                     Spacer()
                 }
@@ -292,7 +289,7 @@ private struct MemoListContentCellView: View {
                 let memoForUpdate = Memo(id: memo.id,
                                          title: memo.title,
                                          content: memo.content,
-                                         date: memo.date,
+                                         date: memo.date.stringToDate,
                                          isChecked: memo.isChecked,
                                          notificatoinType: memo.notificationType)
                 pathModel.paths.append(.memoView(isCreateMode: false, memo: memoForUpdate, selectedDate: nil))
@@ -310,7 +307,8 @@ private struct MemoListContentCellView: View {
                             .foregroundColor(memo.isChecked ? .customDarkBeige : .defaultFont)
                             .strikethrough(memo.isChecked)
                         
-                        Text("\(memo.date.formattedDateForMemo), \(memo.content)")
+                        // TODO: - 메모 삭제 시 date 부분에서 에러
+                        Text("\(memo.date.stringToDate.formattedDateForMemo), \(memo.content)")
                             .font(.system(size: 13, weight: .regular))
                             .foregroundColor(.customDarkGray)
                             .lineLimit(1)

@@ -14,37 +14,34 @@ struct MemoView: View {
     @State var isCreateMode: Bool
     
     var body: some View {
-//        ZStack {
-            VStack {
-                // naviBar
-                CustomNavigationBar(
-                    leftBtnAction: { pathModel.paths.removeLast() },
-                    rightBtnAction: { 
-                        if isCreateMode {
-                            memoListVM.addMemo(memoVM.memo)
-                            pathModel.paths.removeLast()
-                        } else {
-                            memoListVM.updateMemo(memoVM.memo)
-                            pathModel.paths.removeLast()
-                        }
-                        memoVM.setNotification(memo: memoVM.memo)
-                    },
-                    rightBtnType: isCreateMode ? .create : .complete
-                )
-                .padding(.bottom, 10)
-                
-                // titleInput
-                TitleInputView(memoVM: memoVM, isCreateMode: $isCreateMode)
-                
-                // contentInput
-                ContentInputView(memoVM: memoVM)
-                
-                // bottomSection
-                BottomSectionView(memoVM: memoVM, isCreateMode: $isCreateMode)
-                
-            }
+        VStack {
+            // naviBar
+            CustomNavigationBar(
+                leftBtnAction: { pathModel.paths.removeLast() },
+                rightBtnAction: {
+                    if isCreateMode {
+                        memoListVM.addMemo(memoVM.memo)
+                        pathModel.paths.removeLast()
+                    } else {
+                        memoListVM.updateMemo(memoVM.memo)
+                        pathModel.paths.removeLast()
+                    }
+                    memoVM.setNotification(memo: memoVM.memo)
+                },
+                rightBtnType: isCreateMode ? .create : .complete
+            )
+            .padding(.bottom, 10)
             
-        //}
+            // titleInput
+            TitleInputView(memoVM: memoVM, isCreateMode: $isCreateMode)
+            
+            // contentInput
+            ContentInputView(memoVM: memoVM)
+            
+            // bottomSection
+            BottomSectionView(memoVM: memoVM, isCreateMode: $isCreateMode)
+            
+        }
         .background(Color.defalutBackground)
         
     }
@@ -146,7 +143,6 @@ private struct BottomSectionView: View {
                         )
                         .labelsHidden()
                         .accentColor(.customDarkGreen)
-                        .foregroundColor(.customDarkGreen)
                     }
                     
                     // noti
@@ -203,6 +199,6 @@ private struct BottomSectionView: View {
 
 
 #Preview {
-    MemoView(memoVM: MemoViewModel(memo: Memo(title: "", content: "")),
+    MemoView(memoVM: MemoViewModel(memo: Memo(title: "", content: "", date: .now.exactDate)),
              isCreateMode: false)
 }

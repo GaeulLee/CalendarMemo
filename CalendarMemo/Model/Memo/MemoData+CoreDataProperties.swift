@@ -2,7 +2,7 @@
 //  MemoData+CoreDataProperties.swift
 //  CalendarMemo
 //
-//  Created by 이가을 on 12/23/24.
+//  Created by 이가을 on 12/27/24.
 //
 //
 
@@ -19,9 +19,10 @@ extension MemoData {
     @NSManaged public var id: String
     @NSManaged public var title: String
     @NSManaged public var content: String
-    @NSManaged public var date: Date
+    @NSManaged public var date: String
     @NSManaged public var isChecked: Bool
     @NSManaged public var notificationType: NotificationType
+
 }
 
 extension MemoData : Identifiable {

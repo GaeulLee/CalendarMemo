@@ -49,6 +49,7 @@ struct MemoListView: View {
     }
 }
 
+// MARK: - Title
 private struct TitleView: View {
     fileprivate var body: some View {
         HStack {
@@ -62,7 +63,6 @@ private struct TitleView: View {
         .padding(.bottom, 10)
     }
 }
-
 
 // MARK: - List(no memo)
 private struct ListWithNoMemosView: View {
@@ -122,7 +122,7 @@ private struct ListCellView: View {
                 let memoForUpdate = Memo(id: memo.id,
                                          title: memo.title,
                                          content: memo.content,
-                                         date: memo.date,
+                                         date: memo.date.stringToDate,
                                          isChecked: memo.isChecked,
                                          notificatoinType: memo.notificationType)
                 pathModel.paths.append(.memoView(isCreateMode: false, memo: memoForUpdate, selectedDate: nil))
@@ -144,7 +144,8 @@ private struct ListCellView: View {
                             .foregroundColor(memo.isChecked ? .customDarkBeige : .defaultFont)
                             .strikethrough(memo.isChecked)
                         
-                        Text("\(memo.date.formattedDateForMemo), \(memo.content)")
+                        // TODO: - 메모 삭제 시 date 부분에서 에러
+                        Text("\(memo.date.stringToDate.formattedDateForMemo), \(memo.content)")
                             .font(.system(size: 13, weight: .regular))
                             .foregroundColor(.customDarkGray)
                             .lineLimit(1)
@@ -206,9 +207,6 @@ private struct CreateMemoBtnView: View {
         .padding(.bottom, 30)
     }
 }
-
-
-
 
 #Preview {
     MemoListView()

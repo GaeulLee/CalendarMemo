@@ -23,10 +23,15 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    var onlyDate: String {
+    var exactDate: Date {
+        let timeZone = TimeZone.current
+        var date = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
+        return date.addingTimeInterval(TimeInterval(timeZone.secondsFromGMT(for: date)))
+    }
+    
+    func dateToString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy MM dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        return dateFormatter.string(from: self)
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return "\(dateFormatter.string(from: self))"
     }
 }

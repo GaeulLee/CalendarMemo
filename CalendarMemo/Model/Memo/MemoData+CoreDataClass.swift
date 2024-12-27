@@ -2,7 +2,7 @@
 //  MemoData+CoreDataClass.swift
 //  CalendarMemo
 //
-//  Created by 이가을 on 12/23/24.
+//  Created by 이가을 on 12/27/24.
 //
 //
 

@@ -23,7 +23,7 @@ struct Memo: Hashable {
     init(id: String = UUID().uuidString,
          title: String,
          content: String,
-         date: Date = .now,
+         date: Date,
          isChecked: Bool = false,
          notificatoinType: NotificationType = .noNoti
     ) {

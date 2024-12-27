@@ -2,8 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="MemoData" representedClassName="MemoData" syncable="YES">
         <attribute name="content" attributeType="String" defaultValueString=""/>
-        <attribute name="convertedContent" attributeType="String" defaultValueString=""/>
-        <attribute name="date" attributeType="Date" defaultDateTimeInterval="756631500" usesScalarValueType="NO"/>
+        <attribute name="date" attributeType="String" defaultValueString=""/>
         <attribute name="id" attributeType="String" defaultValueString=""/>
         <attribute name="isChecked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="notificationType" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

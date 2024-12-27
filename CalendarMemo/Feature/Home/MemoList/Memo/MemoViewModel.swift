@@ -11,7 +11,7 @@ class MemoViewModel: ObservableObject {
     @Published var memo: Memo
     private let notiService = NotificationService()
 
-    init(memo: Memo, isDisplayCalendar: Bool = false) {
+    init(memo: Memo) {
         self.memo = memo
     }
 }

@@ -41,25 +41,17 @@ class MemoListViewModel: ObservableObject {
         }
         fetchMemos()
     }
-    
-//    init(memos: [Memo] = [],
-//         deleteMemos: [Memo] = [],
-//         isDeleteMode: Bool = false,
-//         isDisplayDeleteAlert: Bool = false
-//    ) {
-//        self.memos = memos
-//        self.deleteMemos = deleteMemos
-//        self.isDeleteMode = isDeleteMode
-//        self.isDisplayDeleteAlert = isDisplayDeleteAlert
-//    }
 }
 
 extension MemoListViewModel {
-
     func fetchMemos() {
         let request = NSFetchRequest<MemoData>(entityName: entityName)
         do {
             memos = try container.viewContext.fetch(request)
+            for memo in memos {
+                dump(memo)
+            }
+            print("SUCCESSFULLY FETCHED CORE DATA")
         } catch {
             print("ERROR FETCHING CORE DATA")
             print(error.localizedDescription)
@@ -69,6 +61,7 @@ extension MemoListViewModel {
     func saveData() {
         do {
             try container.viewContext.save()
+            print("SUCCESSFULLY SAVED CORE DATA")
             fetchMemos()
         } catch {
             print("ERROR SAVING CORE DATA")
@@ -78,71 +71,61 @@ extension MemoListViewModel {
     
     func addMemo(_ memo: Memo) {
         if isVaild(memo) {
+            print("\(#function) start ======================")
+            
             let memoData = MemoData(context: container.viewContext)
             memoData.id = memo.id
             memoData.title = memo.title
             memoData.content = memo.content
-            memoData.date = memo.date
+            memoData.date = memo.date.dateToString()
             memoData.isChecked = memo.isChecked
             memoData.notificationType = memo.notificationType
             
+            print("=======> \(memoData)")
+            
             saveData()
+            print("\(#function) done ======================")
         }
     }
     
     func updateMemo(_ memo: Memo) {
         if isVaild(memo) {
             if let index = memos.firstIndex(where: { $0.id == memo.id }) {
-                var memoData = memos[index]
+                print("\(#function) start ======================")
+                
+                let memoData = memos[index]
                 memoData.title = memo.title
                 memoData.content = memo.content
-                memoData.date = memo.date
+                memoData.date = memo.date.dateToString()
                 memoData.isChecked = memo.isChecked
                 memoData.notificationType = memo.notificationType
                 
+                print("=======> \(memoData)")
+                
                 saveData()
+                print("\(#function) done ======================")
             }
         }
     }
 
-    
     func deleteMemo(_ memo: Memo) {
+        print("\(#function) start ======================")
         if let index = memos.firstIndex(where: { $0.id == memo.id }) {
             container.viewContext.delete(memos[index])
             
             saveData()
+            print("\(#function) done ======================")
         }
     }
     
-
     
     func isMemoWritten(date: Date) -> Bool {
-        if let memo = memos.first(where: { memo in
-            return Calendar.current.isDate(memo.date, inSameDayAs: date)
-        }) {
+        if let memo = memos.first(where: { $0.date == date.dateToString() }) {
             return true
         } else {
             return false
         }
     }
-    
-
-    
-//    // update
-//    func updateMemo(_ memo: Memo) {
-//        if isVaild(memo) {
-//            if let index = memos.firstIndex(where: { $0.id == memo.id }) {
-//                memos[index] = memo
-//            }
-//        }
-//    }
-    
-//    // delete
-//    func deleteMemo(_ memo: Memo) {
-//        if let index = memos.firstIndex(where: { $0.id == memo.id }) {
-//            memos.remove(at: index)
-//        }
-//    }
     
     func defaultCheckboxTapped(_ memo: MemoData) {
         if let index = memos.firstIndex(of: memo) {

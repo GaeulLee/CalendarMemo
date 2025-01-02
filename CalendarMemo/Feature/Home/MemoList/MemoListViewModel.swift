@@ -11,8 +11,7 @@ import CoreData
 class MemoListViewModel: ObservableObject {
     let container: NSPersistentContainer
     let entityName = "MemoData"
-    
-    //@Published var memos: [Memo]
+
     @Published var memos = [MemoData]()
     @Published var deleteMemos: [MemoData]
     @Published var isDeleteMode: Bool
@@ -48,9 +47,6 @@ extension MemoListViewModel {
         let request = NSFetchRequest<MemoData>(entityName: entityName)
         do {
             memos = try container.viewContext.fetch(request)
-            for memo in memos {
-                dump(memo)
-            }
             print("SUCCESSFULLY FETCHED CORE DATA")
         } catch {
             print("ERROR FETCHING CORE DATA")
@@ -71,8 +67,6 @@ extension MemoListViewModel {
     
     func addMemo(_ memo: Memo) {
         if isVaild(memo) {
-            print("\(#function) start ======================")
-            
             let memoData = MemoData(context: container.viewContext)
             memoData.id = memo.id
             memoData.title = memo.title
@@ -81,18 +75,13 @@ extension MemoListViewModel {
             memoData.isChecked = memo.isChecked
             memoData.notificationType = memo.notificationType
             
-            print("=======> \(memoData)")
-            
             saveData()
-            print("\(#function) done ======================")
         }
     }
     
     func updateMemo(_ memo: Memo) {
         if isVaild(memo) {
             if let index = memos.firstIndex(where: { $0.id == memo.id }) {
-                print("\(#function) start ======================")
-                
                 let memoData = memos[index]
                 memoData.title = memo.title
                 memoData.content = memo.content
@@ -100,21 +89,16 @@ extension MemoListViewModel {
                 memoData.isChecked = memo.isChecked
                 memoData.notificationType = memo.notificationType
                 
-                print("=======> \(memoData)")
-                
                 saveData()
-                print("\(#function) done ======================")
             }
         }
     }
 
     func deleteMemo(_ memo: Memo) {
-        print("\(#function) start ======================")
         if let index = memos.firstIndex(where: { $0.id == memo.id }) {
             container.viewContext.delete(memos[index])
             
             saveData()
-            print("\(#function) done ======================")
         }
     }
     
